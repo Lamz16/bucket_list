@@ -1,3 +1,4 @@
+import 'package:bucket_list/add_bucket_list.dart';
 import 'package:bucket_list/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,16 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MainScreen());
+    return MaterialApp(
+      routes: {
+        "/home": (context) {
+          return MainScreen();
+        },
+        "/add": (context){
+          return AddBucketList();
+        },
+      },
+      initialRoute: "/home",
+    );
   }
 }

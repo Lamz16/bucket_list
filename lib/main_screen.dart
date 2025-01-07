@@ -1,3 +1,5 @@
+import 'package:bucket_list/add_bucket_list.dart';
+import 'package:bucket_list/detail_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,15 @@ class _MainScreenState extends State<MainScreen> {
         ),
         backgroundColor: Colors.blue,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return AddBucketList();
+          }));
+        },
+        shape: CircleBorder(),
+        child: Icon(Icons.add),
+      ),
       body: isLoading
           ? Center(
               child: CircularProgressIndicator(),
@@ -39,6 +50,17 @@ class _MainScreenState extends State<MainScreen> {
                   itemCount: bucketListData.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return DetailScreen(
+                            title: bucketListData[index]['item'] ??
+                                "unknown resources",
+                            image:
+                                bucketListData[index]['image'] ?? "default.jpg",
+                          );
+                        }));
+                      },
                       title: Text(
                           bucketListData[index]['item'] ?? "unknown resources"),
                       leading: CircleAvatar(
